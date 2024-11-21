@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title class="animated-title">PASAJERO</ion-title>
+    <ion-title class="animated-title">Buscar Vehículo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,22 +14,47 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Universidad de Santiago</ion-card-title>
-      <ion-card-subtitle>No Disponible</ion-card-subtitle>
-      <ion-button expand="full" color="medium" disabled>Ir Ahora</ion-button>
-    </ion-card-header>
-  </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Universidad de Chile</ion-card-title>
-      <ion-card-subtitle>Distancia: 10 km</ion-card-subtitle>
-      <ion-card-subtitle>Asientos disponibles: 4</ion-card-subtitle>
-      <ion-card-subtitle>Precio: {{ (10 * 2000 * 4) }} CLP</ion-card-subtitle>
-      <ion-button expand="full" color="primary" (click)="null">Pedir Ahora</ion-button>
-    </ion-card-header>
-  </ion-card>
+  <ion-item>
+    <input
+      #searchFieldOrigen
+      type="text"
+      placeholder="Ingresa el origen"
+      style="width: 100%; padding: 8px;"
+    />
+  </ion-item>
+
+  <ion-item>
+    <input
+      #searchFieldDestino
+      type="text"
+      placeholder="Ingresa el destino"
+      style="width: 100%; padding: 8px;"
+    />
+  </ion-item>
+
+  <ion-item>
+    <ion-button expand="full" color="primary" (click)="getUserLocation()">
+      Mi ubicación
+    </ion-button>
+  </ion-item>
+
+  <google-map
+    height="400px"
+    width="100%"
+    [center]="center"
+    [zoom]="zoom">
+    <map-marker
+      *ngFor="let marker of markers"
+      [position]="marker.position"
+      [title]="marker.title">
+    </map-marker>
+  </google-map>
+
+  <ion-item>
+    <ion-button expand="full" color="secondary" (click)="calcularDistancia()">
+      Calcular distancia
+    </ion-button>
+  </ion-item>
 </ion-content>
-<link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+
